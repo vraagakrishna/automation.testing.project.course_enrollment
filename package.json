@@ -1,0 +1,22 @@
+{
+  "name": "automation.testing.project.course_enrollment",
+  "version": "1.0.0",
+  "description": "Course Enrollment",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vraagakrishna/automation.testing.project.course_enrollment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vraagakrishna/automation.testing.project.course_enrollment/issues"
+  },
+  "homepage": "https://github.com/vraagakrishna/automation.testing.project.course_enrollment#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0"
+  }
+}
