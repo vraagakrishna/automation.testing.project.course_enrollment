@@ -8,7 +8,9 @@
     "spell": "cspell \"**/*.{ts,js,json}\"",
     "spell:fix": "cspell \"**/*.{ts,js,json}\" --no-progress --no-summary",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
     "@types/node": "^25.6.0",
     "cspell": "^10.0.0",
     "eslint-plugin-playwright": "^2.10.2",
+    "prettier": "^3.8.3",
     "typescript-eslint": "^8.59.0"
   }
 }
