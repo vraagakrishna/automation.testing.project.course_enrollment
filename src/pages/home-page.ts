@@ -14,7 +14,7 @@ export class HomePage extends BasePage {
 
         await expect(this.page).toHaveTitle(this.homePageTitle);
 
-        const expectedHeading = 'Master Test Automation2';
+        const expectedHeading = 'Master Test Automation';
 
         await this.containsText(this.homePageHeadingLocator, expectedHeading);
     }
