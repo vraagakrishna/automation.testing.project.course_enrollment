@@ -31,11 +31,20 @@ export default defineConfig({
 
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
+        /* Whether to run browser in headless mod */
+        headless: true,
+
         /* Base URL to use in actions like `await page.goto('')`. */
         // baseURL: 'http://localhost:3000',
 
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
+
+        /* Whether to automatically capture a screenshot after each test */
+        screenshot: 'only-on-failure',
+
+        /* Whether to record video for each test */
+        video: 'retain-on-failure',
     },
 
     /* Configure projects for major browsers */
