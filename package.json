@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Course Enrollment",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "spell": "cspell \"**/*.{ts,js,json}\"",
+    "spell:fix": "cspell \"**/*.{ts,js,json}\" --no-progress --no-summary"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vraagakrishna/automation.testing.project.course_enrollment.git"
@@ -17,6 +20,7 @@
   "homepage": "https://github.com/vraagakrishna/automation.testing.project.course_enrollment#readme",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "@types/node": "^25.6.0"
+    "@types/node": "^25.6.0",
+    "cspell": "^10.0.0"
   }
 }
