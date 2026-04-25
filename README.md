@@ -110,3 +110,83 @@ npx playwright codegen
 Automatically generates tests scripts by recording your interactions.
 
 <br/>
+
+# Code Quality Checks
+
+This project enforces code quality using:
+
+- Spell checking (CSpell)
+- Linting (ESLint)
+- Formatting (Prettier)
+
+## Spell check
+
+Check spelling issues:
+
+```bash
+npm run spell
+```
+
+Fix / clean up spelling output:
+
+```bash
+npm run spell:fix
+```
+
+> CSpell does NOT reliably auto-fix words.
+
+> `spell:fix` mainly reduces noise, not bulk fixer.
+
+## Lint
+
+```bash
+npm run lint
+```
+
+Fix lint issues automatically:
+
+```bash
+npm run lint:fix
+```
+
+## Formatting
+
+Check formatting:
+
+```bash
+npm run format:check
+```
+
+Auto-fix formatting:
+
+```bash
+npm run format
+```
+
+<br/>
+
+## Run Everything Before Push
+
+Recommended before pushing code:
+
+```bash
+npm run spell
+npm run lint
+npm run format:check
+npm run test
+```
+
+<br/>
+
+## CI Pipeline
+
+On every push and pull request, the pipeline automatically runs:
+
+1. Spell check
+2. Lint check
+3. Format check
+4. Playwright tests
+
+If any steps fails, the pipeline stops immediately.
+
+<br/>
