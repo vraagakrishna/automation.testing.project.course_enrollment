@@ -2,10 +2,13 @@
   "name": "automation.testing.project.course_enrollment",
   "version": "1.0.0",
   "description": "Course Enrollment",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "spell": "cspell \"**/*.{ts,js,json}\"",
-    "spell:fix": "cspell \"**/*.{ts,js,json}\" --no-progress --no-summary"
+    "spell:fix": "cspell \"**/*.{ts,js,json}\" --no-progress --no-summary",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -19,8 +22,11 @@
   },
   "homepage": "https://github.com/vraagakrishna/automation.testing.project.course_enrollment#readme",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",
-    "cspell": "^10.0.0"
+    "cspell": "^10.0.0",
+    "eslint-plugin-playwright": "^2.10.2",
+    "typescript-eslint": "^8.59.0"
   }
 }

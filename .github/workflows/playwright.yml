@@ -23,7 +23,9 @@ jobs:
 
       - name: Spell Check
         run: npm run spell
-        continue-on-error: true
+
+      - name: Lint
+        run: npm run lint
 
   test:
     needs: quality
