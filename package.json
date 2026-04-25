@@ -10,7 +10,10 @@
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "test": "npx playwright test",
+        "test:ui": "npx playwright test --ui",
+        "test:debug": "npx playwright test --debug"
     },
     "repository": {
         "type": "git",
