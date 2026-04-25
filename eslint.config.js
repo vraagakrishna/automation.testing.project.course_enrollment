@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import playwright from 'eslint-plugin-playwright';
+import unicorn from 'eslint-plugin-unicorn';
 
 export default [
     js.configs.recommended,
@@ -20,6 +21,7 @@ export default [
         },
         plugins: {
             playwright,
+            unicorn,
         },
         rules: {
             'no-unused-vars': 'warn',
@@ -32,6 +34,35 @@ export default [
             'playwright/no-focused-test': 'error',
 
             '@typescript-eslint/no-floating-promises': 'error',
+
+            '@typescript-eslint/naming-convention': [
+                'error',
+                {
+                    selector: 'class',
+                    format: ['PascalCase'],
+                },
+                {
+                    selector: 'function',
+                    format: ['camelCase'],
+                },
+                {
+                    selector: 'variable',
+                    format: ['camelCase'],
+                },
+                {
+                    selector: 'typeLike',
+                    format: ['PascalCase'],
+                },
+            ],
+
+            'unicorn/filename-case': [
+                'error',
+                {
+                    cases: {
+                        kebabCase: true,
+                    },
+                },
+            ],
         },
     },
 ];
