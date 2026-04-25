@@ -6,15 +6,15 @@ TBC
 
 <br/>
 
-# Tech Stack 
+# Tech Stack
 
-* **Framework**: Playwright 
-* **Language**: TypeScript 
-* **Runtime**: Node.js (v18+)
+- **Framework**: Playwright
+- **Language**: TypeScript
+- **Runtime**: Node.js (v18+)
 
 <br/>
 
-# Project Structure 
+# Project Structure
 
 ```bash
 .
@@ -27,24 +27,24 @@ TBC
 
 <br/>
 
-# Setup / Installation 
+# Setup / Installation
 
-1. Clone the repository 
+1. Clone the repository
 
 ```bash
 git clone https://github.com/vraagakrishna/automation.testing.project.course_enrollment.git
 cd automation.testing.project.course_enrollment
 ```
 
-2. Install dependencies 
+2. Install dependencies
 
 ```bash
 npm install
 ```
 
-This installs all project dependencies defined in `package.json`, including Playwright. 
+This installs all project dependencies defined in `package.json`, including Playwright.
 
-3. Install Playwright browsers 
+3. Install Playwright browsers
 
 ```bash
 npx playwright install
@@ -52,9 +52,10 @@ npx playwright install
 
 This downloads the browser binaries (Chromium, Firefox, WebKit) required to run the tests.
 
-> Why both? 
-> * `npm install` -> installs libraries and dependencies
-> * `npx playwright install` -> installs actual browsers used for testing
+> Why both?
+>
+> - `npm install` -> installs libraries and dependencies
+> - `npx playwright install` -> installs actual browsers used for testing
 
 <br/>
 
@@ -68,13 +69,13 @@ npx playwright test
 
 Runs the full end-to-end test suite.
 
-### Run tests in UI mode 
+### Run tests in UI mode
 
 ```bash
 npx playwright test --ui
 ```
 
-Starts the interactive UI mode for running and debugging tests visually. 
+Starts the interactive UI mode for running and debugging tests visually.
 
 ### Run tests in a specific browser
 
@@ -84,7 +85,7 @@ npx playwright test --project=chromium
 
 Runs the tests only on Desktop Chrome (Chromium).
 
-### Run a specific test file 
+### Run a specific test file
 
 ```bash
 npx playwright test example
