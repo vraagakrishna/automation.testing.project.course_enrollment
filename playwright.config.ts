@@ -12,7 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-    testDir: './tests',
+    testDir: './src/tests',
 
     /* Run tests in files in parallel */
     fullyParallel: true,
@@ -35,7 +35,7 @@ export default defineConfig({
         headless: true,
 
         /* Base URL to use in actions like `await page.goto('')`. */
-        // baseURL: 'http://localhost:3000',
+        baseURL: 'https://ndosisimplifiedautomation.vercel.app',
 
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
