@@ -3,6 +3,7 @@ import { HomePage } from '../pages/home-page';
 import { LoginPage } from '../pages/auth/login-page';
 import { NavBar } from '../components/nav-bar';
 import { DashboardPage } from '../pages/dashboard/dashboard-page';
+import { env } from '../utils/env';
 
 test.describe('Login Page Tests', () => {
     test.beforeEach(async ({ page }) => {
@@ -41,7 +42,7 @@ test.describe('Login Page Tests', () => {
     test('Login with valid credentials - Admin', async ({ page }) => {
         const lp = new LoginPage(page);
 
-        await lp.loginUser('rk.admin@gmail.com', '@12345678');
+        await lp.loginUser(env.adminEmail, env.adminPassword);
 
         const dp = new DashboardPage(page);
         await dp.verifyDashboardPage();
@@ -50,7 +51,7 @@ test.describe('Login Page Tests', () => {
     test('Login with valid credentials - User', async ({ page }) => {
         const lp = new LoginPage(page);
 
-        await lp.loginUser('rk.user@gmail.com', '@12345678');
+        await lp.loginUser(env.userEmail, env.userPassword);
 
         const dp = new DashboardPage(page);
         await dp.verifyDashboardPage();
