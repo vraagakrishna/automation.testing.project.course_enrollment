@@ -17,14 +17,14 @@ export class BasePage {
     // #region Protected Methods
 
     protected async containsText(locator: string, expectedText: string) {
-        const headingLocator = this.getLocator(locator);
+        const element = this.getLocator(locator);
 
-        await expect(headingLocator).toBeVisible();
+        await expect(element).toBeVisible();
 
-        const headingText = await headingLocator.textContent();
-        console.info(`Text found: '${headingText}', Expected Text: '${expectedText}'`);
+        const text = await element.textContent();
+        console.info(`Text found: '${text}', Expected Text: '${expectedText}'`);
 
-        await expect(headingLocator).toContainText(expectedText);
+        await expect(element).toContainText(expectedText);
     }
 
     protected async shouldBeVisible(locator: string) {
