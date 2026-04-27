@@ -1,3 +1,4 @@
+import { UserTestData } from '../utils/user-test-data';
 import { test } from './fixtures/auth.fixture';
 
 test.describe('Login Page Tests', () => {
@@ -12,7 +13,9 @@ test.describe('Login Page Tests', () => {
     test('Login with invalid credentials', async ({ loginReady }) => {
         const alertPromise = loginReady.verifyErrorMessage('invalid');
 
-        await loginReady.loginUser('dummy@gmail.com', 'something something');
+        const user_test_data = new UserTestData();
+
+        await loginReady.loginUser(user_test_data.email, user_test_data.weakPassword);
 
         await alertPromise;
     });
