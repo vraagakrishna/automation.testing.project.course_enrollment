@@ -1,13 +1,5 @@
-import test from '@playwright/test';
-import { HomePage } from '../pages/home-page';
+import { test } from './fixtures/app.fixture';
 
 test.describe('Home Page Tests', () => {
-    test.beforeEach(async ({ page }) => {
-        await page.goto('');
-    });
-
-    test('Verify Home Page is verified', async ({ page }) => {
-        const hp = new HomePage(page);
-        await hp.verifyHomePage();
-    });
+    test('Verify Home Page is verified', async ({ homeReady: _homeReady }) => {});
 });
