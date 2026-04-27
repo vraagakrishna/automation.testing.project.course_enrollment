@@ -1,14 +1,23 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
+import { DialogHandler } from '../utils/dialog';
 
 export class BasePage {
     protected page: Page;
+    protected dialog: DialogHandler;
+
+    // #region Ctor
 
     constructor(page: Page) {
         this.page = page;
+        this.dialog = new DialogHandler(this.page);
     }
 
-    async containsText(locator: string, expectedText: string) {
-        const headingLocator = this.page.locator(locator);
+    // #endregion
+
+    // #region Protected Methods
+
+    protected async containsText(locator: string, expectedText: string) {
+        const headingLocator = this.getLocator(locator);
 
         await expect(headingLocator).toBeVisible();
 
@@ -17,4 +26,30 @@ export class BasePage {
 
         await expect(headingLocator).toContainText(expectedText);
     }
+
+    protected async shouldBeVisible(locator: string) {
+        await expect(this.getLocator(locator)).toBeVisible();
+    }
+
+    protected async click(locator: string) {
+        const element = this.getLocator(locator);
+
+        await element.click();
+    }
+
+    protected async fill(locator: string, value: string) {
+        const element = this.getLocator(locator);
+
+        await element.fill(value);
+    }
+
+    // #endregion
+
+    // #region Private Methods
+
+    private getLocator(locator: string): Locator {
+        return this.page.locator(locator);
+    }
+
+    // #endregion
 }

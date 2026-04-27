@@ -4,9 +4,14 @@ import { defineConfig, devices } from '@playwright/test';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const fileName = fileURLToPath(import.meta.url);
+const dirName = path.dirname(fileName);
+
+dotenv.config({ path: path.resolve(dirName, '.env') });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -29,6 +34,9 @@ export default defineConfig({
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
     reporter: 'html',
 
+    /* Timeout for each test in milliseconds */
+    timeout: 60_000, // 1 minute per test
+
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Whether to run browser in headless mod */
@@ -45,6 +53,17 @@ export default defineConfig({
 
         /* Whether to record video for each test */
         video: 'retain-on-failure',
+
+        /* Default timeout for each Playwright action in milliseconds */
+        actionTimeout: 30_000, // 30 seconds
+
+        /* Timeout for each navigation action in milliseconds */
+        navigationTimeout: 30_000, // 30 seconds
+    },
+
+    expect: {
+        /* Default timeout for async expect matchers in milliseconds */
+        timeout: 10_000, // 10 seconds
     },
 
     /* Configure projects for major browsers */
