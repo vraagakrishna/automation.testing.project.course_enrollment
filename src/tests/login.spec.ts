@@ -13,9 +13,9 @@ test.describe('Login Page Tests', () => {
     test('Login with invalid credentials', async ({ loginReady }) => {
         const alertPromise = loginReady.verifyErrorMessage('invalid');
 
-        const user_test_data = new UserTestData();
+        const userTestData = new UserTestData();
 
-        await loginReady.loginUser(user_test_data.email, user_test_data.weakPassword);
+        await loginReady.loginUser(userTestData.email, userTestData.weakPassword);
 
         await alertPromise;
     });

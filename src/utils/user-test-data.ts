@@ -1,16 +1,15 @@
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 
 export class UserTestData {
-
-    domains: string[] = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com"];
+    domains: string[] = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com'];
     firstName = this.generateFakeFirstName();
     lastName = this.generateFakeLastName();
     email = this.generateFakeEmail();
-    weakPassword = faker.internet.password({length: 6});
+    weakPassword = faker.internet.password({ length: 6 });
     password = this.generateFakePassword();
 
     private sanitize(input: string) {
-        return input.replaceAll(/[^A-Za-z0-9]/g, "");
+        return input.replaceAll(/[^A-Za-z0-9]/g, '');
     }
 
     private randomDomain(): string {
@@ -32,11 +31,12 @@ export class UserTestData {
     }
 
     private generateFakePassword(): string {
-        let newPassword: string = '';
-        const specialCharRegex = /[!@#$%^&*()_+\-={}\[\]|:;'"<>,.?/]/;
+        let newPassword: string;
+
+        const specialCharRegex = /[!@#$%^&*()_+\-={}[\]|:;'"<>,.?/]/;
 
         do {
-            newPassword = faker.internet.password({length: 10 });
+            newPassword = faker.internet.password({ length: 10 });
         } while (!specialCharRegex.test(newPassword));
 
         return newPassword;
