@@ -37,12 +37,24 @@ export class BasePage {
         await element.click();
     }
 
+    protected async clickByBtnRole(name: string) {
+        await this.page.getByRole('button', { name: name }).click();
+    }
+
     protected async fill(locator: string, value: string) {
         const element = this.getLocator(locator);
 
         await element.fill(value);
     }
 
+    protected async fillByPlaceholder(placeholder: string, value: string) {
+        await this.page.getByPlaceholder(placeholder).fill(value);
+    }
+
+    protected async selectOptionFromDropdown(locator: string, option: string) {
+        const element = this.getLocator(locator);
+        await element.selectOption({ label: option });
+    }
     // #endregion
 
     // #region Private Methods
