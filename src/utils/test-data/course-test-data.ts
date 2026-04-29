@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
+import { TestData } from './test-data';
 
-export class CourseTestData {
+export class CourseTestData extends TestData {
     public randomCourseName(): string {
-        return `${faker.person.jobArea()} at ${faker.company.name()}`;
+        return this.sanitizeKeepSpaces(`${faker.person.jobArea()} at ${faker.company.name()}`);
     }
 
     public randomDescription(): string {

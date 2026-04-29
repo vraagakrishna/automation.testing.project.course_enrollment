@@ -1,4 +1,4 @@
-import { UserTestData } from '../utils/user-test-data';
+import { UserTestData } from '../utils/test-data/user-test-data';
 import { test } from './fixtures/auth.fixture';
 
 test.describe('Login Page Tests', () => {

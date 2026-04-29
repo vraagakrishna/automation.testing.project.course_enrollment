@@ -1,6 +1,6 @@
 import { test } from './fixtures/admin.fixtures';
 import { Course } from '../models/course.model';
-import { CourseTestData } from '../utils/course-test-data';
+import { CourseTestData } from '../utils/test-data/course-test-data';
 import { env } from '../utils/env';
 
 test.describe('Course Enrollment Tests', () => {

@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
+import { TestData } from './test-data';
 
-export class UserTestData {
+export class UserTestData extends TestData {
     domains: string[] = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com'];
     firstName = this.generateFakeFirstName();
     lastName = this.generateFakeLastName();
@@ -8,21 +9,17 @@ export class UserTestData {
     weakPassword = faker.internet.password({ length: 6 });
     password = this.generateFakePassword();
 
-    private sanitize(input: string) {
-        return input.replaceAll(/[^A-Za-z0-9]/g, '');
-    }
-
     private randomDomain(): string {
         const randomIndex: number = Math.floor(Math.random() * this.domains.length);
         return this.domains[randomIndex];
     }
 
     private generateFakeFirstName(): string {
-        return this.sanitize(faker.person.firstName());
+        return this.sanitizeNoSpace(faker.person.firstName());
     }
 
     private generateFakeLastName(): string {
-        return this.sanitize(faker.person.lastName());
+        return this.sanitizeNoSpace(faker.person.lastName());
     }
 
     private generateFakeEmail(): string {
