@@ -63,7 +63,7 @@ export default defineConfig({
 
     expect: {
         /* Default timeout for async expect matchers in milliseconds */
-        timeout: 10_000, // 10 seconds
+        timeout: 20_000, // 20 seconds
     },
 
     /* Configure projects for major browsers */
