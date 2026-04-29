@@ -1,7 +1,7 @@
-import { Locator, Page } from "@playwright/test";
-import { BasePage } from "../base-page";
-import { Course } from "../../models/course.model";
-import { SoftAssert } from "../../utils/soft-assert ";
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '../base-page';
+import { Course } from '../../models/course.model';
+import { SoftAssert } from '../../utils/soft-assert ';
 
 export class CoursePage extends BasePage {
     constructor(page: Page) {
@@ -13,18 +13,22 @@ export class CoursePage extends BasePage {
 
         try {
             const courseCardElement = await this.findCourseCard(course.title);
-            softAssert.attachScreenshot('course-content', this.page);
+            await softAssert.attachScreenshot('course-content', this.page);
 
             return courseCardElement;
-        }
-        catch {
+        } catch {
             console.log('Course did not exist');
-            softAssert.attachScreenshot('course-did-not-exist', this.page);
+            await softAssert.attachScreenshot('course-did-not-exist', this.page);
             return null;
         }
     }
 
-    async validateCourseDetails(course: Course, courseCardElement: Locator, shouldEnroll: boolean, softAssert: SoftAssert) {
+    async validateCourseDetails(
+        course: Course,
+        courseCardElement: Locator,
+        shouldEnroll: boolean,
+        softAssert: SoftAssert
+    ) {
         console.log(`Validate course details: `, course);
 
         // =========================
@@ -32,10 +36,8 @@ export class CoursePage extends BasePage {
         // =========================
         console.log('Validating description...');
         try {
-            const actualDescription = (
-                await courseCardElement.locator('p').first().innerText()
-            ).trim();
-            console.log(`Actual description: ${actualDescription}`)
+            const actualDescription = (await courseCardElement.locator('p').first().innerText()).trim();
+            console.log(`Actual description: ${actualDescription}`);
 
             if (actualDescription !== course.description) {
                 softAssert.add(
@@ -57,9 +59,7 @@ export class CoursePage extends BasePage {
             const badgeTexts: string[] = [];
 
             for (let i = 0; i < badgeCount; i++) {
-                badgeTexts.push(
-                    (await badges.nth(i).innerText()).trim()
-                );
+                badgeTexts.push((await badges.nth(i).innerText()).trim());
             }
 
             // Validate level
@@ -71,9 +71,7 @@ export class CoursePage extends BasePage {
                 console.log(`Actual level: ${actualLevel}`);
 
                 if (actualLevel.toLowerCase() !== course.level.toLowerCase()) {
-                    softAssert.add(
-                        `Expected course level: ${course.level}, but actual course level: ${actualLevel}`
-                    );
+                    softAssert.add(`Expected course level: ${course.level}, but actual course level: ${actualLevel}`);
                 }
             }
 
@@ -90,10 +88,7 @@ export class CoursePage extends BasePage {
                 console.log(`Actual price: ${actualPrice}`);
 
                 if (expectedPrice == null || expectedPrice === 0) {
-                    if (
-                        actualPrice.toLowerCase() !== 'free' &&
-                        actualPrice.toLowerCase() !== 'r0.00'
-                    ) {
+                    if (actualPrice.toLowerCase() !== 'free' && actualPrice.toLowerCase() !== 'r0.00') {
                         softAssert.add(`Expected no price or 'Free', but got: ${actualPrice}`);
                     }
                 } else {
@@ -127,8 +122,7 @@ export class CoursePage extends BasePage {
 
                 if (!expectedUrl) {
                     softAssert.add('Image is displayed but no expected thumbnail URL was provided');
-                }
-                else if (actualUrl !== expectedUrl) {
+                } else if (actualUrl !== expectedUrl) {
                     softAssert.add(`Expected course thumbnail URL: ${expectedUrl}, but found: ${actualUrl}`);
                 }
             }

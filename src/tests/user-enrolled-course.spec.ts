@@ -43,7 +43,7 @@ test.describe('User Enrolled Course Tests', () => {
         // END: Verify Enrolled for Course
 
         // START: Verify Course is displayed
-        userDashboardPage.clickViewAllCourses();
+        await userDashboardPage.clickViewAllCourses();
 
         const userCourseElement = await coursePage.findCourse(course, softAssert);
 
@@ -60,7 +60,7 @@ test.describe('User Enrolled Course Tests', () => {
 
             // cousre exists and published
             else {
-                coursePage.validateCourseDetails(course, userCourseElement, true, softAssert);
+                await coursePage.validateCourseDetails(course, userCourseElement, true, softAssert);
             }
         }
         // END: Verify Course is displayed

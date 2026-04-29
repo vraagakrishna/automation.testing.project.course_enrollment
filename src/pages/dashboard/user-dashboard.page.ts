@@ -1,7 +1,7 @@
-import { Locator, Page } from "@playwright/test";
-import { BasePage } from "../base-page";
-import { Course } from "../../models/course.model";
-import { SoftAssert } from "../../utils/soft-assert ";
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '../base-page';
+import { Course } from '../../models/course.model';
+import { SoftAssert } from '../../utils/soft-assert ';
 
 export class UserDashboardPage extends BasePage {
     constructor(page: Page) {
@@ -10,18 +10,18 @@ export class UserDashboardPage extends BasePage {
 
     async clickViewAllCourses() {
         console.log('Clicking View All courses Button');
-        this.clickByBtnRole('View All');
+        await this.clickByBtnRole('View All');
     }
 
     async validateEnrolledCourse(course: Course, softAssert: SoftAssert) {
-        console.log(`Finding enrolled course: ${course.title}`)
+        console.log(`Finding enrolled course: ${course.title}`);
 
         try {
             await this.findCourse(course.title);
-            softAssert.attachScreenshot('course-exists', this.page);
+            await softAssert.attachScreenshot('course-exists', this.page);
         } catch {
             console.log('Course did not exist!');
-            softAssert.attachScreenshot('course-does-not-exist', this.page);
+            await softAssert.attachScreenshot('course-does-not-exist', this.page);
         }
     }
 
