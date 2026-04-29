@@ -9,11 +9,12 @@
         "spell:fix": "cspell \"**/*.{ts,js,json}\" --no-progress --no-summary",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "format": "prettier --write .",
-        "format:check": "prettier --check .",
+        "format": "prettier --check .",
+        "format:fix": "prettier --write .",
         "test": "npx playwright test",
         "test:ui": "npx playwright test --ui",
-        "test:debug": "npx playwright test --debug"
+        "test:debug": "npx playwright test --debug",
+        "test:report": "npx playwright show-report"
     },
     "repository": {
         "type": "git",

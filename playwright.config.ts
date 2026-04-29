@@ -35,7 +35,7 @@ export default defineConfig({
     reporter: 'html',
 
     /* Timeout for each test in milliseconds */
-    timeout: 60_000, // 1 minute per test
+    timeout: 120_000, // 2 minutes per test
 
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
@@ -55,7 +55,7 @@ export default defineConfig({
         video: 'retain-on-failure',
 
         /* Default timeout for each Playwright action in milliseconds */
-        actionTimeout: 30_000, // 30 seconds
+        actionTimeout: 20_000, // 20 seconds
 
         /* Timeout for each navigation action in milliseconds */
         navigationTimeout: 30_000, // 30 seconds

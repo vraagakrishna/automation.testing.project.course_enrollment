@@ -1,4 +1,4 @@
-import { Dialog, expect, Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class DialogHandler {
     constructor(private page: Page) {
@@ -8,9 +8,7 @@ export class DialogHandler {
     async verifyAlertMessage(expectedMessage: string, accept = true) {
         console.log('Waiting for alert...');
 
-        const dialog: Dialog = await new Promise((resolve) => {
-            this.page.once('dialog', resolve);
-        });
+        const dialog = await this.page.waitForEvent('dialog');
 
         const alertMessage = dialog.message();
         console.log(`Alert message found: '${alertMessage}'`);
