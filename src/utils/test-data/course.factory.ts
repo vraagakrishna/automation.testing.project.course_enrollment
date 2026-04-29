@@ -5,10 +5,7 @@ export class CourseFactory {
     static create(published: boolean): Course {
         const data = new CourseTestData();
 
-        const course = new Course(
-            data.randomCourseName(),
-            data.randomDescription()
-        );
+        const course = new Course(data.randomCourseName(), data.randomDescription());
 
         course.level = data.randomCourseLevel();
         course.duration = data.validDuration();

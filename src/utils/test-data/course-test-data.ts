@@ -28,8 +28,6 @@ export class CourseTestData extends TestData {
     }
 
     randomCourseLevel(): CourseLevel {
-        return COURSE_LEVELS[
-            Math.floor(Math.random() * COURSE_LEVELS.length)
-        ];
+        return COURSE_LEVELS[Math.floor(Math.random() * COURSE_LEVELS.length)];
     }
 }

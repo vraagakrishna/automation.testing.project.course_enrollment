@@ -1,4 +1,4 @@
-import { env } from "../utils/env";
+import { env } from '../utils/env';
 
 export async function enrollCourseFlow({
     addCourseReady,
@@ -8,7 +8,7 @@ export async function enrollCourseFlow({
     courseManagementPage,
     enrollmentsManagementPage,
     course,
- }: any) {
+}: any) {
     // Add course
     const alertPromise = addCourseReady.verifyAlertMessage('created');
 
