@@ -11,7 +11,7 @@ export class CourseTestData extends TestData {
     }
 
     public validDuration(): string {
-        return faker.number.bigInt() + ' hours';
+        return faker.number.int({ min: 10, max: 100 }) + ' hours';
     }
 
     public validPrice(): number {
