@@ -13,7 +13,6 @@ export class SoftAssert {
     }
 
     hasErrors(): boolean {
-        console.log(this.errors.length);
         return this.errors.length > 0;
     }
 
