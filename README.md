@@ -167,13 +167,13 @@ npm run lint:fix
 Check formatting:
 
 ```bash
-npm run format:check
+npm run format
 ```
 
 Auto-fix formatting:
 
 ```bash
-npm run format
+npm run format:fix
 ```
 
 <br/>
@@ -185,7 +185,7 @@ Recommended before pushing code:
 ```bash
 npm run spell
 npm run lint
-npm run format:check
+npm run format
 npm run test
 ```
 
