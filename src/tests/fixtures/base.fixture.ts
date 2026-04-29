@@ -1,4 +1,4 @@
-import { test as base } from '@playwright/test';
+import { test as base } from './soft-assert.fixture';
 import { HomePage } from '../../pages/home-page';
 import { NavBar } from '../../components/nav-bar';
 import { LoginPage } from '../../pages/auth/login-page';

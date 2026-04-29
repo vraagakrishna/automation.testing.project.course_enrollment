@@ -1,7 +1,8 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from '../base-page';
 import console from 'node:console';
 import { Course } from '../../models/course.model';
+import { SoftAssert } from '../../utils/soft-assert ';
 
 export class CourseManagementPage extends BasePage {
     // #region Locators
@@ -63,6 +64,30 @@ export class CourseManagementPage extends BasePage {
         console.log(`Verifying alert message is: '${expectedMsg}'`);
 
         await this.dialog.verifyAlertMessage(expectedMsg);
+    }
+
+    async validateCourseIsDisplayed(course: Course, softAssert: SoftAssert): Promise<Locator | null> {
+        try {
+            console.log(`Verifying course is displayed: ${course.title}`);
+
+            const courseCard = await this.findCourse(course);
+
+            await softAssert.attachScreenshot(
+                'course-content',
+                this.page
+            );
+
+            try {
+                await this.validateCourseContent(courseCard, course, softAssert);
+                return courseCard;
+            } catch {
+                console.log('Course content is incorrect!');
+                return null;
+            }
+        } catch {
+            console.log('Course did not exist after creation!');
+            return null;
+        }
     }
 
     // #endregion
@@ -250,6 +275,206 @@ export class CourseManagementPage extends BasePage {
 
     private async clickCreateCourseBtn() {
         await this.click(this.createCourseBtnLocator);
+    }
+
+    private async findCourse(course: Course): Promise<Locator> {
+        const courseCard = this.page.locator(
+            `//div[contains(@class,'courses-grid')]` +
+            `//h3[normalize-space()='${course.title}']/ancestor::div[2]`
+        );
+
+        await courseCard.scrollIntoViewIfNeeded();
+
+        return courseCard;
+    }
+
+    private async validateCourseContent(courseCard: Locator, course: Course, softAssert: SoftAssert) {
+        const softErrors: string[] = [];
+
+        // -------------------------
+        // Description
+        // -------------------------
+        console.log('Validating description...');
+        const description = courseCard.locator('p');
+        const actualDescription = (await description.textContent())?.trim() ?? '';
+        console.log(`Actual description: ${actualDescription}`)
+
+        expect(actualDescription).toBe(course.description);
+
+        // -------------------------
+        // Level + Duration 
+        // -------------------------
+        console.log('Validating level and duration...');
+        try {
+            const badges = courseCard.locator('div').locator('div').locator('span');
+            const badgeCount = await badges.count();
+
+            const badgeTexts: string[] = [];
+            for (let i = 0; i < badgeCount; i++) {
+                badgeTexts.push((await badges.nth(i).innerText()).trim());
+            }
+
+            // Level
+            console.log('Validating level');
+            if (badgeTexts.length === 0) {
+                softErrors.push(
+                    `Expected level: ${course.level}, but no badges found`
+                );
+            } else {
+                const actualLevel = badgeTexts[0];
+                console.log(`Actual level: ${actualLevel}`)
+
+                try {
+                    expect(actualLevel.toLowerCase()).toBe(course.level.toLowerCase());
+                } catch {
+                    softErrors.push(
+                        `Expected level: ${course.level}, but got: ${actualLevel}`
+                    );
+                }
+            }
+
+            // Duration
+            console.log('Validating duration');
+            if (course.duration?.trim()) {
+                if (badgeTexts.length < 2) {
+                    softErrors.push(
+                        `Expected duration: ${course.duration}, but badge not found`
+                    );
+                } else {
+                    const actualDuration = badgeTexts[1];
+                    console.log(`Actual duration: ${actualDuration}`)
+
+                    if (!actualDuration.toLowerCase().includes(course.duration.toLowerCase())) {
+                        softErrors.push(
+                            `Expected duration: ${course.duration}, but got: ${actualDuration}`
+                        );
+                    }
+                }
+            } else {
+                console.log('Duration not provided -> skipping validation');
+            }
+        } catch {
+            softErrors.push(
+                `Expected course level: ${course.level}, duration: ${course.duration}, but got: none`
+            );
+        }
+
+        // -------------------------
+        // Price
+        // -------------------------
+        console.log('Validating price');
+        try {
+            const priceElements = courseCard.locator('span', {
+                hasText: /^R\d+(\.\d{2})?$/
+            })
+
+            const priceCount = await priceElements.count();
+
+            if (!course.price || course.price === 0) {
+                if (priceCount > 0) {
+                    const actualPrice = (await priceElements.first().innerText()).trim();
+                    console.log(`Actual price: ${actualPrice}`);
+
+                    if (!(actualPrice === 'Free' || actualPrice === 'R0.00')) {
+                        softErrors.push(
+                            `Expected Free/R0.00, but got: ${actualPrice}`
+                        );
+                    }
+                }
+            } else {
+                if (priceCount === 0) {
+                    softErrors.push(
+                        `Expected price: ${course.price}, but nothing displayed`
+                    );
+                } else {
+                    const actualPrice = (await priceElements.first().innerText()).trim();
+                    console.log(`Actual price: ${actualPrice}`);
+
+                    const expected = `R${course.price.toFixed(2)}`;
+
+                    try {
+                        expect(actualPrice).toBe(expected);
+                    } catch {
+                        softErrors.push(
+                            `Expected price: ${expected}, but got: ${actualPrice}`
+                        );
+                    }
+                }
+            }
+        } catch {
+            softErrors.push(
+                `Expected price: ${course.price}, but got none`
+            );
+        }
+
+        // -------------------------
+        // Thumbnail
+        // -------------------------
+        console.log('Validating thumbnail');
+        try {
+            const thumbnail = courseCard.locator('div').first();
+            const style = (await thumbnail.getAttribute('style')) ?? '';
+            const actualUrl = this.extractBackgroundUrl(style);
+            console.log(`Actual thumbnail: ${actualUrl}`)
+
+            const expectedUrl = course.thumbnailUrl;
+
+            if (!expectedUrl) {
+                if (actualUrl) {
+                    softErrors.push(
+                        `Expected no thumbnail, but found: ${actualUrl}`
+                    );
+                }
+            } else {
+                if (!actualUrl) {
+                    softErrors.push(
+                        `Expected thumbnail URL: ${expectedUrl}, but none found`
+                    );
+                } else {
+                    try {
+                        expect(actualUrl).toBe(expectedUrl);
+                    } catch {
+                        softErrors.push(
+                            `Expected thumbnail: ${expectedUrl}, but got: ${actualUrl}`
+                        );
+                    }
+                }
+            }
+        } catch {
+            softErrors.push(
+                `Expected thumbnail: ${course.thumbnailUrl}, but got none`
+            );
+        }
+
+
+        // -------------------------
+        // Published / Draft
+        // -------------------------
+        console.log('Validating Published or Draft');
+        const statusText = course.published ? 'Published' : 'Draft';
+
+        const statusVisible = await courseCard.getByText(statusText).isVisible().catch(() => false);
+
+        if (!statusVisible) {
+            softErrors.push(
+                `Course should be ${statusText} but label not found`
+            );
+        }
+
+        // -------------------------
+        // Final assertion (soft assert equivalent)
+        // -------------------------
+        if (softErrors.length > 0) {
+            softAssert.add(`Course validation failed for ${course.title}:\n` + softErrors.join('\n'));
+            throw new Error(
+                `Course validation failed:\n` + softErrors.join('\n')
+            );
+        }
+    }
+
+    private extractBackgroundUrl(style: string): string | null {
+        const match = style.match(/url\(["']?(.*?)["']?\)/);
+        return match ? match[1] : null;
     }
 
     // #endregion

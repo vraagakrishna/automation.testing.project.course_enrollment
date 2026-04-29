@@ -2,7 +2,7 @@ export class Course {
     title: string;
     description: string;
     duration?: string;
-    level: string = 'Beginner';
+    level: 'Beginner' | 'Intermediate' | 'Advanced' = 'Beginner';
     price?: number;
     thumbnailUrl?: string;
     meetingUrl?: string;
