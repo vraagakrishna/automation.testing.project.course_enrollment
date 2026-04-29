@@ -1,6 +1,7 @@
 import { test } from './fixtures/admin.fixtures';
 import { Course } from '../models/course.model';
 import { CourseTestData } from '../utils/course-test-data';
+import { env } from '../utils/env';
 
 test.describe('Course Enrollment Tests', () => {
     test.afterEach(({}) => {
@@ -19,6 +20,7 @@ test.describe('Course Enrollment Tests', () => {
         navBar,
         adminDashboardPage,
         courseManagementPage,
+        enrollmentsManagementPage,
     }) => {
         const courseTestData = new CourseTestData();
         const course = new Course(courseTestData.randomCourseName(), courseTestData.randomDescription());
@@ -50,10 +52,15 @@ test.describe('Course Enrollment Tests', () => {
             courseElement = await addCourseReady.validateCourseIsDisplayed(course, softAssert);
         }
 
+        if (courseElement == null) return;
+
         // click enrollment btn
+        await navBar.clickEnrollmentsBtn();
 
         // click enroll
+        await enrollmentsManagementPage.clickEnroll(course.title, env.userEmail, course.published, softAssert);
 
         // search for enrollment
+        await enrollmentsManagementPage.searchForEnrollment(course.title, env.userEmail, course.published);
     });
 });

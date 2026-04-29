@@ -43,6 +43,15 @@ export class BasePage {
         await this.page.getByRole('button', { name: name }).click();
     }
 
+    protected async clickByBtnRoleExact(name: string) {
+        await this.page
+            .getByRole('button', {
+                name: name,
+                exact: true,
+            })
+            .click();
+    }
+
     protected async fill(locator: string, value: string) {
         const element = this.getLocator(locator);
 
