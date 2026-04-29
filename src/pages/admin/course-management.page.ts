@@ -3,6 +3,7 @@ import { BasePage } from '../base-page';
 import console from 'node:console';
 import { Course } from '../../models/course.model';
 import { SoftAssert } from '../../utils/soft-assert ';
+import { ConfigManager } from '../../utils/config-manager';
 
 export class CourseManagementPage extends BasePage {
     // #region Locators
@@ -53,6 +54,8 @@ export class CourseManagementPage extends BasePage {
     async addCourse(course: Course) {
         console.log(`Adding course: `, course);
 
+        ConfigManager.addCourse(course);
+
         await this.clearAddCourseForm();
 
         await this.populateCourseData(course);
@@ -85,6 +88,26 @@ export class CourseManagementPage extends BasePage {
             console.log('Course did not exist after creation!');
             return null;
         }
+    }
+
+    async validateCourseIsDisplayedAndNoAssertion(course: Course) {
+        try {
+            console.log(`Verifying course '${course.title}' is displayed...`);
+            return this.findCourse(course);
+        } catch {
+            console.log('Course did not exist');
+            return null;
+        }
+    }
+
+    async deleteCourse(courseElement: Locator) {
+        console.log(`Deleting course`);
+
+        const confirmDialogPromise = this.dialog.verifyAlertMessage('Are you sure you want to delete this course?');
+
+        await this.clickCourseDeleteBtn(courseElement);
+
+        await confirmDialogPromise;
     }
 
     // #endregion
@@ -443,6 +466,14 @@ export class CourseManagementPage extends BasePage {
     private extractBackgroundUrl(style: string): string | null {
         const match = style.match(/url\(["']?(.*?)["']?\)/);
         return match ? match[1] : null;
+    }
+
+    private async clickCourseDeleteBtn(courseCard: Locator) {
+        // Finds the 2nd button inside the course card (delete button)
+        const deleteButton = courseCard.locator('button').nth(1);
+
+        await deleteButton.scrollIntoViewIfNeeded();
+        await deleteButton.click();
     }
 
     // #endregion
