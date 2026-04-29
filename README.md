@@ -18,10 +18,23 @@ TBC
 
 ```bash
 .
-├── tests/
-│   └── example.spec.ts    # Example end-to-end test
+├── src/
+│   ├── components/        # Reusable UI components (e.g. navigation, headers)
+│   ├── models/            # TypeScript models / data structures
+│   ├── pages/             # Page Objects (Page Object Model)
+│   │   ├── admin/
+│   │   ├── auth/
+│   │   ├── dashboard/
+│   │   └── base-page.ts   # Shared page functionality
+│   │
+│   ├── tests/             # Test specs and fixtures
+│   │   ├── fixtures/      # Custom Playwright fixtures
+│   │   └── *.spec.ts      # Test cases
+│   │
+│   └── utils/             # Test utilities and helpers
+│
 ├── playwright.config.ts   # Playwright configuration
-├── package.json
+├── package.json           # Dependencies & scripts
 └── README.md
 ```
 
