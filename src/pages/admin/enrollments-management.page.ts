@@ -67,7 +67,7 @@ export class EnrollmentsManagementPage extends BasePage {
 
         console.log('Course exists: ' + courseExists);
 
-        expect(courseExists, 'Course should exist buy it does not exist!').toBe(shouldWork);
+        expect(courseExists, 'Course should exist but it does not exist!').toBe(shouldWork);
 
         if (!courseExists) {
             console.log('Course does not exist; nothing to do!');
