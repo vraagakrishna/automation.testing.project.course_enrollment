@@ -55,7 +55,7 @@ export default defineConfig({
         video: 'retain-on-failure',
 
         /* Default timeout for each Playwright action in milliseconds */
-        actionTimeout: 30_000, // 30 seconds
+        actionTimeout: 10_000, // 30 seconds
 
         /* Timeout for each navigation action in milliseconds */
         navigationTimeout: 30_000, // 30 seconds
