@@ -463,11 +463,6 @@ export class CourseManagementPage extends BasePage {
         }
     }
 
-    private extractBackgroundUrl(style: string): string | null {
-        const match = style.match(/url\(["']?(.*?)["']?\)/);
-        return match ? match[1] : null;
-    }
-
     private async clickCourseDeleteBtn(courseCard: Locator) {
         // Finds the 2nd button inside the course card (delete button)
         const deleteButton = courseCard.locator('button').nth(1);

@@ -66,6 +66,11 @@ export class BasePage {
         const element = this.getLocator(locator);
         await element.selectOption({ label: option });
     }
+
+    protected extractBackgroundUrl(style: string): string | null {
+        const match = style.match(/url\(["']?(.*?)["']?\)/);
+        return match ? match[1] : null;
+    }
     // #endregion
 
     // #region Private Methods

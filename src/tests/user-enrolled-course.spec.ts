@@ -3,13 +3,16 @@ import { test } from './fixtures/course.fixture';
 
 test.describe('User Enrolled Course Tests', () => {
     test('User sees enrolled Course', async ({
-        publishAndEnrollCourseReady,
+        publishAndEnrollCourseReady: course,
         navBar,
         dashboardPage,
         homePage,
         loginPage,
+        userDashboardPage,
+        softAssert,
+        coursePage,
     }) => {
-        console.log(publishAndEnrollCourseReady.title);
+        console.log(course.title);
 
         // click 'Back to Website'
         await navBar.clickBackToWebsiteBtn();
@@ -36,10 +39,30 @@ test.describe('User Enrolled Course Tests', () => {
         });
 
         // START: Verify Enrolled for Course
+        await userDashboardPage.validateEnrolledCourse(course, softAssert);
         // END: Verify Enrolled for Course
 
         // START: Verify Course is displayed
+        userDashboardPage.clickViewAllCourses();
 
+        const userCourseElement = await coursePage.findCourse(course, softAssert);
+
+        if (userCourseElement == null) {
+            // course is published and does not exist
+            if (course.published) {
+                softAssert.add(`User cannot see Published Course: ${course.title}`);
+            }
+        } else {
+            // course is unpublishded and does exist
+            if (!course.published) {
+                softAssert.add(`User cannot see Unpublished Course: ${course.title}`);
+            }
+
+            // cousre exists and published
+            else {
+                coursePage.validateCourseDetails(course, userCourseElement, true, softAssert);
+            }
+        }
         // END: Verify Course is displayed
 
         // logout
