@@ -156,8 +156,8 @@ export class CoursePage extends BasePage {
             const enrolledText = (await courseCardElement.locator('button').first().innerText()).trim();
             console.log(`Enrolled text: ${enrolledText}`);
 
-            const userEnrolled = enrolledText.toLowerCase().includes('enrolled') && 
-                !enrolledText.toLowerCase().includes('not enrolled');
+            const userEnrolled =
+                enrolledText.toLowerCase().includes('enrolled') && !enrolledText.toLowerCase().includes('not enrolled');
 
             if (userEnrolled !== shouldEnroll) {
                 softAssert.add(`Expected enrolled: ${shouldEnroll}, but actual enrolled: ${userEnrolled}`);
