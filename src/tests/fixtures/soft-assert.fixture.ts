@@ -6,7 +6,8 @@ type SoftAssertFixtures = {
 };
 
 export const test = base.extend<SoftAssertFixtures>({
-    softAssert: async (_, use, testInfo) => {
+    // eslint-disable-next-line no-empty-pattern
+    softAssert: async ({}, use, testInfo) => {
         const softAssert = new SoftAssert();
 
         softAssert.setTestInfo(testInfo);
