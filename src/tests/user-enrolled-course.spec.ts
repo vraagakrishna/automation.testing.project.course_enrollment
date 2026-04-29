@@ -1,5 +1,5 @@
-import { loginAndVerify } from "../flows/auth-login.flow";
-import { test } from "./fixtures/course.fixture";
+import { loginAndVerify } from '../flows/auth-login.flow';
+import { test } from './fixtures/course.fixture';
 
 test.describe('User Enrolled Course Tests', () => {
     test('User sees enrolled Course', async ({
@@ -14,10 +14,10 @@ test.describe('User Enrolled Course Tests', () => {
         // click 'Back to Website'
         await navBar.clickBackToWebsiteBtn();
 
-        // verify dashboard page is displayed 
+        // verify dashboard page is displayed
         await dashboardPage.verifyDashboardPage();
 
-        // log out admin 
+        // log out admin
         await navBar.clickLogOutBtn();
 
         // verify home page is displayed

@@ -43,7 +43,7 @@ export class NavBar extends BasePage {
         console.log('Click Log Out Btn');
         await this.click(this.profileBtnLocator);
 
-        const alertPromise = this.dialog.verifyAlertMessage("Are you sure you want to logout?");
+        const alertPromise = this.dialog.verifyAlertMessage('Are you sure you want to logout?');
 
         await this.clickByBtnRole('Logout');
 

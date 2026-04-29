@@ -1,8 +1,6 @@
-import { ConfigManager } from "../utils/config-manager";
+import { ConfigManager } from '../utils/config-manager';
 
-export async function cleanUpCourses({
-    navBar, adminDashboardPage, courseManagementPage,
-}: any) {
+export async function cleanUpCourses({ navBar, adminDashboardPage, courseManagementPage }: any) {
     for (const course of ConfigManager.getCourses()) {
         console.log(`Cleaning up course '${course.title}'`);
 

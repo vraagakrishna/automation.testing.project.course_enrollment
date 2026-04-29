@@ -1,14 +1,12 @@
-import { test as base } from './admin.fixtures'
-import { CourseManagementPage } from "../../pages/admin/course-management.page"
+import { test as base } from './admin.fixtures';
 import { CourseFactory } from '../../utils/test-data/course.factory';
 import { enrollCourseFlow } from '../../flows/course-enrollment.flow';
-import { cleanUpCourses } from '../../flows/clean-up-courses.flow';
 import { loginAndVerify } from '../../flows/auth-login.flow';
 import { Course } from '../../models/course.model';
 
 type CourseFixtures = {
     publishAndEnrollCourseReady: Course;
-}
+};
 
 export const test = base.extend<CourseFixtures>({
     publishAndEnrollCourseReady: async (
@@ -53,7 +51,7 @@ export const test = base.extend<CourseFixtures>({
         // Verify admin panel is displayed
         await adminDashboardPage.verifyAdminDashboardIsDisplayed();
 
-                // Go to manage courses
+        // Go to manage courses
         await adminDashboardPage.navigateToManageCourses();
 
         // Verify course management page is displayed

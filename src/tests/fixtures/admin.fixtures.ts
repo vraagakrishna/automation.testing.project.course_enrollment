@@ -47,7 +47,9 @@ export const test = base.extend<AdminFixtures>({
         await use(courseManagementPage);
 
         await cleanUpCourses({
-            navBar, adminDashboardPage, courseManagementPage,
+            navBar,
+            adminDashboardPage,
+            courseManagementPage,
         });
     },
 });
