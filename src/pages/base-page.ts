@@ -34,6 +34,8 @@ export class BasePage {
     protected async click(locator: string) {
         const element = this.getLocator(locator);
 
+        await element.scrollIntoViewIfNeeded();
+
         await element.click();
     }
 
