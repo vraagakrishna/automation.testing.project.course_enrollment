@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { TestData } from './test-data';
+import { COURSE_LEVELS, CourseLevel } from './course-levels';
 
 export class CourseTestData extends TestData {
     public randomCourseName(): string {
@@ -24,5 +25,11 @@ export class CourseTestData extends TestData {
 
     public validTeamsLink(): string {
         return 'https://teams.microsoft.com/l/meetup-join/' + faker.internet.username();
+    }
+
+    randomCourseLevel(): CourseLevel {
+        return COURSE_LEVELS[
+            Math.floor(Math.random() * COURSE_LEVELS.length)
+        ];
     }
 }

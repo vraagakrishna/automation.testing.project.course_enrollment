@@ -1,8 +1,10 @@
+import { CourseLevel } from '../utils/test-data/course-levels';
+
 export class Course {
     title: string;
     description: string;
     duration?: string;
-    level: 'Beginner' | 'Intermediate' | 'Advanced' = 'Beginner';
+    level: CourseLevel = 'Beginner';
     price?: number;
     thumbnailUrl?: string;
     meetingUrl?: string;
