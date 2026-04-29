@@ -1,4 +1,4 @@
-import { TestInfo } from "@playwright/test";
+import { TestInfo } from '@playwright/test';
 
 export class SoftAssert {
     private errors: string[] = [];
@@ -13,7 +13,7 @@ export class SoftAssert {
     }
 
     hasErrors(): boolean {
-        console.log(this.errors.length)
+        console.log(this.errors.length);
         return this.errors.length > 0;
     }
 
@@ -28,7 +28,7 @@ export class SoftAssert {
 
         await this.testInfo.attach(name, {
             body: screenshot,
-            contentType: 'image/png'
+            contentType: 'image/png',
         });
     }
 }

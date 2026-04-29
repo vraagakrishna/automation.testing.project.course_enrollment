@@ -3,7 +3,7 @@ import { SoftAssert } from '../../utils/soft-assert ';
 
 type SoftAssertFixtures = {
     softAssert: SoftAssert;
-}
+};
 
 export const test = base.extend<SoftAssertFixtures>({
     softAssert: async (_, use, testInfo) => {
@@ -14,7 +14,12 @@ export const test = base.extend<SoftAssertFixtures>({
         await use(softAssert);
 
         if (softAssert.hasErrors()) {
-            const message = `Soft Assertion Failures:\n` + softAssert.getErrors().map(e => `* ${e}`).join('\n');
+            const message =
+                `Soft Assertion Failures:\n` +
+                softAssert
+                    .getErrors()
+                    .map((e) => `* ${e}`)
+                    .join('\n');
 
             // attach to report
             await testInfo.attach('soft-assert-errors', {
@@ -25,4 +30,4 @@ export const test = base.extend<SoftAssertFixtures>({
             throw new Error(message);
         }
     },
-})
+});

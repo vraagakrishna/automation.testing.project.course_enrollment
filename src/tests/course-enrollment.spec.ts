@@ -3,7 +3,7 @@ import { Course } from '../models/course.model';
 import { CourseTestData } from '../utils/course-test-data';
 
 test.describe('Course Enrollment Tests', () => {
-    test.afterEach(({ }) => {
+    test.afterEach(({}) => {
         // click Overview btn
 
         // navigate to manage courses
@@ -13,7 +13,13 @@ test.describe('Course Enrollment Tests', () => {
         // delete course
     });
 
-    test('Enroll user to Unpublished Course', async ({ addCourseReady, softAssert, navBar, adminDashboardPage, courseManagementPage }) => {
+    test('Enroll user to Unpublished Course', async ({
+        addCourseReady,
+        softAssert,
+        navBar,
+        adminDashboardPage,
+        courseManagementPage,
+    }) => {
         const courseTestData = new CourseTestData();
         const course = new Course(courseTestData.randomCourseName(), courseTestData.randomDescription());
         course.level = 'Advanced';
