@@ -13,8 +13,7 @@ export class DialogHandler {
         const alertMessage = dialog.message();
         console.log(`Alert message found: '${alertMessage}'`);
 
-        expect(alertMessage.toLowerCase())
-            .toContain(expectedMessage.toLowerCase());
+        expect(alertMessage.toLowerCase()).toContain(expectedMessage.toLowerCase());
 
         if (accept) {
             await dialog.accept();
