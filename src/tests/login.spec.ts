@@ -1,6 +1,9 @@
 import { UserTestData } from '../utils/test-data/user-test-data';
 import { test } from './fixtures/auth.fixture';
 
+// Runs tests sequentially
+test.describe.configure({ mode: 'serial' });
+
 test.describe('Login Page Tests', () => {
     test('Submission of blank form', async ({ loginReady }) => {
         const alertPromise = loginReady.verifyErrorMessage('email and password');
