@@ -2,11 +2,11 @@ import { CourseManagementPage } from '../../pages/admin/course-management.page';
 import { env } from '../../utils/env';
 import { test as base } from './auth.fixture';
 
-type MyFixtures = {
+type AdminFixtures = {
     addCourseReady: CourseManagementPage;
 };
 
-export const test = base.extend<MyFixtures>({
+export const test = base.extend<AdminFixtures>({
     addCourseReady: async (
         {
             navBar,

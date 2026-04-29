@@ -2,12 +2,12 @@ import { test as base } from './base.fixture';
 import { LoginPage } from '../../pages/auth/login-page';
 import { HomePage } from '../../pages/home-page';
 
-type MyFixtures = {
+type AppFixtures = {
     homeReady: HomePage;
     loginReady: LoginPage;
 };
 
-export const test = base.extend<MyFixtures>({
+export const test = base.extend<AppFixtures>({
     homeReady: async ({ page, homePage }, use) => {
         await page.goto('');
         await homePage.verifyHomePage();

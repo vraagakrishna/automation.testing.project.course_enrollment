@@ -2,12 +2,12 @@ import { test as base } from './app.fixture';
 import { DashboardPage } from '../../pages/dashboard/dashboard-page';
 import { env } from '../../utils/env';
 
-type MyFixtures = {
+type AuthFixtures = {
     adminDashboard: DashboardPage;
     userDashboard: DashboardPage;
 };
 
-export const test = base.extend<MyFixtures>({
+export const test = base.extend<AuthFixtures>({
     adminDashboard: async ({ loginReady, dashboardPage }, use) => {
         await loginReady.loginUser(env.adminEmail, env.adminPassword);
         await dashboardPage.verifyDashboardPage();

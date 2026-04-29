@@ -7,7 +7,7 @@ import { AdminDashboardPage } from '../../pages/dashboard/admin-dashboard.page';
 import { EnrollmentsManagementPage } from '../../pages/admin/enrollments-management.page';
 import { CourseManagementPage } from '../../pages/admin/course-management.page';
 
-type MyFixtures = {
+type BaseFixtures = {
     homePage: HomePage;
     navBar: NavBar;
     loginPage: LoginPage;
@@ -17,7 +17,7 @@ type MyFixtures = {
     courseManagementPage: CourseManagementPage;
 };
 
-export const test = base.extend<MyFixtures>({
+export const test = base.extend<BaseFixtures>({
     homePage: async ({ page }, use) => {
         const hp = new HomePage(page);
         await use(hp);
