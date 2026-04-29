@@ -42,21 +42,36 @@ export default [
 
             '@typescript-eslint/naming-convention': [
                 'error',
+
+                // classes
                 {
                     selector: 'class',
                     format: ['PascalCase'],
                 },
+
+                // functions
                 {
                     selector: 'function',
                     format: ['camelCase'],
                 },
-                {
-                    selector: 'variable',
-                    format: ['camelCase'],
-                },
+
+                // types, interfaces, enums
                 {
                     selector: 'typeLike',
                     format: ['PascalCase'],
+                },
+
+                // variables + constants + parameters
+                {
+                    selector: 'variableLike',
+                    format: ['camelCase', 'UPPER_CASE'],
+                },
+
+                // allow underscore prefix for unused params (IMPORTANT)
+                {
+                    selector: 'parameter',
+                    format: ['camelCase'],
+                    leadingUnderscore: 'allow',
                 },
             ],
 
