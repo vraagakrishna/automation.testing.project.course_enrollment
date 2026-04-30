@@ -42,7 +42,10 @@ export async function enrollCourseFlow({
         courseElement = await addCourseReady.validateCourseIsDisplayed(course, softAssert);
     }
 
-    if (courseElement == null) return;
+    if (courseElement == null) {
+        console.log(`Course '${course.title}' not found; Skipping enrollment`);
+        return;
+    }
 
     // click enrollment btn
     await navBar.clickEnrollmentsBtn();
@@ -51,5 +54,5 @@ export async function enrollCourseFlow({
     await enrollmentsManagementPage.clickEnroll(course.title, env.userEmail, course.published, softAssert);
 
     // search for enrollment
-    await enrollmentsManagementPage.searchForEnrollment(course.title, env.userEmail, course.published);
+    await enrollmentsManagementPage.searchForEnrollment(course.title, env.userEmail, course.published, softAssert);
 }

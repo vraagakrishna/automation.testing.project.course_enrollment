@@ -21,8 +21,6 @@ export class CourseManagementPage extends BasePage {
     private meetingUrlLocator = "//label[contains(text(),'Meeting URL')]/following::input[1]";
     private publishedLocator = "//input[@type='checkbox']";
     private createCourseBtnLocator = "//button[normalize-space()='Create Course']";
-    private saveCourseBtnLocator = "//button[contains(., 'Update Course') and @type='submit']";
-    private cancelCourseBtnLocator = "//button[normalize-space()='Cancel']";
     // #endregion
 
     // #endregion
@@ -459,7 +457,7 @@ export class CourseManagementPage extends BasePage {
         // -------------------------
         if (softErrors.length > 0) {
             softAssert.add(`Course validation failed for ${course.title}:\n` + softErrors.join('\n'));
-            throw new Error(`Course validation failed:\n` + softErrors.join('\n'));
+            return;
         }
     }
 

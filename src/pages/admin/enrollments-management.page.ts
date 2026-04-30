@@ -86,7 +86,7 @@ export class EnrollmentsManagementPage extends BasePage {
         await softAssert.attachScreenshot('enrolled-user-to-course', this.page);
     }
 
-    async searchForEnrollment(courseName: string, userEmail: string, shouldExist: boolean) {
+    async searchForEnrollment(courseName: string, userEmail: string, shouldExist: boolean, softAssert: SoftAssert) {
         console.log(`Searching enrollment '${userEmail}' -> '${courseName}'`);
 
         await this.searchEmail(userEmail);
@@ -121,6 +121,8 @@ export class EnrollmentsManagementPage extends BasePage {
 
         const count = await rows.count();
         console.log(`Results found: ${count}`);
+
+        await softAssert.attachScreenshot('enrolled-user-to-course', this.page);
 
         if (shouldExist) expect(count).toBeGreaterThan(0);
         else expect(count).toBe(0);

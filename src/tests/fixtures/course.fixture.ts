@@ -10,16 +10,7 @@ type CourseFixtures = {
 
 export const test = base.extend<CourseFixtures>({
     publishAndEnrollCourseReady: async (
-        {
-            addCourseReady,
-            softAssert,
-            navBar,
-            adminDashboardPage,
-            courseManagementPage,
-            enrollmentsManagementPage,
-            loginPage,
-            dashboardPage,
-        },
+        { addCourseReady, softAssert, navBar, adminDashboardPage, enrollmentsManagementPage, loginPage, dashboardPage },
         use
     ) => {
         const course = CourseFactory.create(true);
@@ -29,7 +20,6 @@ export const test = base.extend<CourseFixtures>({
             softAssert,
             navBar,
             adminDashboardPage,
-            courseManagementPage,
             enrollmentsManagementPage,
             course,
         });
@@ -55,6 +45,6 @@ export const test = base.extend<CourseFixtures>({
         await adminDashboardPage.navigateToManageCourses();
 
         // Verify course management page is displayed
-        await courseManagementPage.verifyCourseManagementPageIsDisplayed();
+        await addCourseReady.verifyCourseManagementPageIsDisplayed();
     },
 });
