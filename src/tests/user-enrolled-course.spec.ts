@@ -12,7 +12,7 @@ test.describe('User Enrolled Course Tests', () => {
         softAssert,
         coursePage,
     }) => {
-        console.log(course.title);
+        console.log(`User should see enrolled course: ${course.title}`);
 
         // click 'Back to Website'
         await navBar.clickBackToWebsiteBtn();
