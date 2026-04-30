@@ -8,7 +8,6 @@ test.describe('Course Enrollment Tests', () => {
         softAssert,
         navBar,
         adminDashboardPage,
-        courseManagementPage,
         enrollmentsManagementPage,
     }) => {
         const course = CourseFactory.create(false);
@@ -18,7 +17,6 @@ test.describe('Course Enrollment Tests', () => {
             softAssert,
             navBar,
             adminDashboardPage,
-            courseManagementPage,
             enrollmentsManagementPage,
             course,
         });
@@ -29,7 +27,6 @@ test.describe('Course Enrollment Tests', () => {
         softAssert,
         navBar,
         adminDashboardPage,
-        courseManagementPage,
         enrollmentsManagementPage,
     }) => {
         const course = CourseFactory.create(true);
@@ -39,7 +36,6 @@ test.describe('Course Enrollment Tests', () => {
             softAssert,
             navBar,
             adminDashboardPage,
-            courseManagementPage,
             enrollmentsManagementPage,
             course,
         });

@@ -1,6 +1,17 @@
+import { NavBar } from '../components/nav-bar';
+import { CourseManagementPage } from '../pages/admin/course-management.page';
+import { AdminDashboardPage } from '../pages/dashboard/admin-dashboard.page';
 import { ConfigManager } from '../utils/config-manager';
 
-export async function cleanUpCourses({ navBar, adminDashboardPage, courseManagementPage }: any) {
+export async function cleanUpCourses({
+    navBar,
+    adminDashboardPage,
+    courseManagementPage,
+}: {
+    navBar: NavBar;
+    adminDashboardPage: AdminDashboardPage;
+    courseManagementPage: CourseManagementPage;
+}) {
     for (const course of ConfigManager.getCourses()) {
         console.log(`Cleaning up course '${course.title}'`);
 
