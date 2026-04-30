@@ -1,9 +1,6 @@
 import { loginAndVerify } from '../flows/auth-login.flow';
 import { test } from './fixtures/course.fixture';
 
-// Runs tests sequentially
-test.describe.configure({ mode: 'serial' });
-
 test.describe('User Enrolled Course Tests', () => {
     test('User sees enrolled Course', async ({
         publishAndEnrollCourseReady: course,

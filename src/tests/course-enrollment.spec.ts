@@ -2,9 +2,6 @@ import { test } from './fixtures/admin.fixtures';
 import { CourseFactory } from '../utils/test-data/course.factory';
 import { enrollCourseFlow } from '../flows/course-enrollment.flow';
 
-// Runs tests sequentially
-test.describe.configure({ mode: 'serial' });
-
 test.describe('Course Enrollment Tests', () => {
     test('Enroll user to Unpublished Course', async ({
         addCourseReady,
