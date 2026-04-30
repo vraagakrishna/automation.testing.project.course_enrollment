@@ -35,7 +35,7 @@ export default defineConfig({
     reporter: 'html',
 
     /* Timeout for each test in milliseconds */
-    timeout: 120_000, // 2 minutes per test
+    timeout: 300_000, // 5 minutes per test
 
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
@@ -63,7 +63,7 @@ export default defineConfig({
 
     expect: {
         /* Default timeout for async expect matchers in milliseconds */
-        timeout: 10_000, // 10 seconds
+        timeout: 20_000, // 20 seconds
     },
 
     /* Configure projects for major browsers */

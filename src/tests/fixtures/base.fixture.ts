@@ -6,6 +6,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard-page';
 import { AdminDashboardPage } from '../../pages/dashboard/admin-dashboard.page';
 import { EnrollmentsManagementPage } from '../../pages/admin/enrollments-management.page';
 import { CourseManagementPage } from '../../pages/admin/course-management.page';
+import { UserDashboardPage } from '../../pages/dashboard/user-dashboard.page';
+import { CoursePage } from '../../pages/user/course.page';
 
 type BaseFixtures = {
     homePage: HomePage;
@@ -15,6 +17,8 @@ type BaseFixtures = {
     adminDashboardPage: AdminDashboardPage;
     enrollmentsManagementPage: EnrollmentsManagementPage;
     courseManagementPage: CourseManagementPage;
+    userDashboardPage: UserDashboardPage;
+    coursePage: CoursePage;
 };
 
 export const test = base.extend<BaseFixtures>({
@@ -51,5 +55,15 @@ export const test = base.extend<BaseFixtures>({
     courseManagementPage: async ({ page }, use) => {
         const cmp = new CourseManagementPage(page);
         await use(cmp);
+    },
+
+    userDashboardPage: async ({ page }, use) => {
+        const udp = new UserDashboardPage(page);
+        await use(udp);
+    },
+
+    coursePage: async ({ page }, use) => {
+        const cp = new CoursePage(page);
+        await use(cp);
     },
 });

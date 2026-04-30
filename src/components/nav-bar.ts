@@ -32,4 +32,21 @@ export class NavBar extends BasePage {
 
         await this.clickByBtnRole('Overview');
     }
+
+    async clickBackToWebsiteBtn() {
+        console.log('Click Back to Website Btn');
+
+        await this.clickByBtnRole('Back to Website');
+    }
+
+    async clickLogOutBtn() {
+        console.log('Click Log Out Btn');
+        await this.click(this.profileBtnLocator);
+
+        const alertPromise = this.dialog.verifyAlertMessage('Are you sure you want to logout?');
+
+        await this.clickByBtnRole('Logout');
+
+        await alertPromise;
+    }
 }

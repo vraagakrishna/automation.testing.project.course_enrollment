@@ -2,7 +2,33 @@
 
 # Project Overview
 
-TBC
+This project is an end-to-end automation framework built with **Playwright** and **TypeScript** to validate the core enrollment workflow of [Ndosi Test Automation](https://www.ndosiautomation.co.za/).
+
+### Objective
+
+This primary goal of this project is to automate and verify the full enrollment journey across multiple user roles - from an administrator enrolling a student into a course, to the student confirming successful enrollment from their own account.
+
+### Core Workflow
+
+The framework covers the following business process:
+
+1. Log in as an **Admin**
+2. Navigate to the **Admin Panel**
+3. Access the **Enrollmnets** section
+4. Enroll an existing **Student** account into a course
+5. Log in as the **Student**
+6. Validate that the student is successfully enrolled in the selected course
+
+### Framework Design
+
+The project is structured for scalability, maintainability, and long-term growth using:
+
+- **Page Object Model (POM)** for reusable page interactions
+- **Fixtures** for pre-configured test states
+- **Flows** (Service Layer) for reusable business processes
+- **Factories** (Test Data Utilities) for dynamic data generation
+- **Soft Assertions** for capturing multiple validation issues in a single run
+- **Automatic Clean Up** for improved test isolation and repeatability
 
 <br/>
 
@@ -167,13 +193,13 @@ npm run lint:fix
 Check formatting:
 
 ```bash
-npm run format:check
+npm run format
 ```
 
 Auto-fix formatting:
 
 ```bash
-npm run format
+npm run format:fix
 ```
 
 <br/>
@@ -185,7 +211,7 @@ Recommended before pushing code:
 ```bash
 npm run spell
 npm run lint
-npm run format:check
+npm run format
 npm run test
 ```
 
